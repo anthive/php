@@ -4,8 +4,7 @@ header('Content-Type: application/json');
 const ACTIONS = ["stay","move","eat","load","unload"];
 const DIRECTIONS = ["up","down","right","left"];
 
-//$payload = file_get_contents("php://input");
-$payload = file_get_contents("payload.json");
+$payload = file_get_contents("php://input");
 
 //Hive object from request payload
 $hive = json_decode($payload,true);
