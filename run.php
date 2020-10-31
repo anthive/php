@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-const ACTIONS = ["stay","move","eat","load","unload"];
+const ACTIONS = ["stay","move","eat","take","put"];
 const DIRECTIONS = ["up","down","right","left"];
 
 $payload = file_get_contents("php://input");
