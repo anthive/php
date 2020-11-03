@@ -19,8 +19,11 @@ foreach ($hive["ants"] as $ant){
     array_push($orders,$order);
 }
 
-// json format sample:
-// {"1":{"act":"load","dir":"down"},"17":{"act":"load","dir":"up"}}
+// json output format sample:
+// {"orders": [
+//	 {"antId":1,"act":"move","dir":"down"},
+//	 {"antId":17,"act":"load","dir":"up"}
+//	]}
 $response = new stdClass();
 $response->orders = $orders;
 echo json_encode($response);
