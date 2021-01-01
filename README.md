@@ -3,7 +3,7 @@
 ## [Import](https://github.com/new/import) this sample bot.
 
 ## Requirements
-- php ^5
+- php ^7.4
 - Set your username in [ANTHIVE](ANTHIVE) file.
 - Register your bot at https://profile.anthive.io/bots
 
