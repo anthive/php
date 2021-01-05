@@ -1,8 +1,9 @@
 <?php
-// your bot response should be json object
+
+// Your bot response should be json object
 header('Content-Type: application/json');
 
-// available actions and directions
+// Available actions and directions
 const ACTIONS = ['stay', 'move', 'eat', 'take', 'put'];
 const DIRECTIONS = ['up', 'down', 'right', 'left'];
 
@@ -14,32 +15,38 @@ $payload = file_get_contents('php://input');
 // Hive object from request payload
 $hive = json_decode($payload, true);
 
-$orders = array();
+// This is just an example.
+// For example, we give random order to ant.
+// Your bot will have to be more complex and change the strategy
+// based on the information on the map (payload.canvas).
+// Payload example https://github.com/anthive/php/blob/master/payload.json
+// Return should look something like this
+//   [ 'antId' => 1, 'act' => 'move', 'dir' => 'down' ]
+// More information https://anthive.io/rules/
+$antStrategy = function ($ant) {
+    return [
+        'antId' => $ant['id'],
+        'act' => ACTIONS[rand(0, 4)],
+        'dir' => DIRECTIONS[rand(0, 3)],
+    ];
+};
 
 // Loop through ants and give orders
-// For each enat create order object (move to random direction)
-foreach ($hive['ants'] as $ant){
-    $order->antId = $ant['id'];
-    $order->act = 'move';
-    // pick random direction from array on line 6
-    $order->dir = DIRECTIONS[rand(0,3)];
-    array_push($orders,$order);
-}
+$orders = array_map($antStrategy, $hive['ants']);
 
-// response json should look something like this
+// Response json should look something like this
 // {'orders': [
-//	 {'antId':1,'act':'move','dir':'down'},
-//	 {'antId':17,'act':'load','dir':'up'}
+//  {'antId':1,'act':'move','dir':'down'},
+//  {'antId':17,'act':'load','dir':'up'}
 // ]}
 
-// finish your json response 
-$response->orders = $orders;
-echo json_encode($response);
+// Finish your json response 
+echo json_encode([
+    'orders' => $orders,
+]);
 
-// this code available at https://github.com/anthive/php
+// This code available at https://github.com/anthive/php
 // to test it localy, submit post request with payload.json using postman or curl
 // curl -X 'POST' -d @payload.json http://localhost:7070
 
-// have fun!
-
-?>
+// Have fun!
