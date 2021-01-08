@@ -1,5 +1,4 @@
 <?php
-
 // Your bot response should be json object
 header('Content-Type: application/json');
 
@@ -15,13 +14,10 @@ $payload = file_get_contents('php://input');
 // Hive object from request payload
 $hive = json_decode($payload, true);
 
-// This is just an example.
-// For example, we give random order to ant.
+// As example, we give order to 'move' in random direction.
 // Your bot will have to be more complex and change the strategy
-// based on the information on the map (payload.canvas).
+// based on map information (payload.canvas).
 // Payload example https://github.com/anthive/php/blob/master/payload.json
-// Return should look something like this
-//   [ 'antId' => 1, 'act' => 'move', 'dir' => 'down' ]
 // More information https://anthive.io/rules/
 $antStrategy = function ($ant) {
     return [
@@ -34,7 +30,7 @@ $antStrategy = function ($ant) {
 // Loop through ants and give orders
 $orders = array_map($antStrategy, $hive['ants']);
 
-// Response json should look something like this
+// Response json should look something like this:
 // {'orders': [
 //  {'antId':1,'act':'move','dir':'down'},
 //  {'antId':17,'act':'load','dir':'up'}
