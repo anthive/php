@@ -22,7 +22,7 @@ $hive = json_decode($payload, true);
 $antStrategy = function ($ant) {
     return [
         'antId' => $ant['id'],
-        'act' => ACTIONS[rand(0, 4)],
+        'act' => 'move',
         'dir' => DIRECTIONS[rand(0, 3)],
     ];
 };
@@ -43,6 +43,7 @@ echo json_encode([
 
 // This code available at https://github.com/anthive/php
 // to test it localy, submit post request with payload.json using postman or curl
-// curl -X 'POST' -d @payload.json http://localhost:7070
+// curl -X 'POST' -d @payload.json http://localhost/
 
 // Have fun!
+
